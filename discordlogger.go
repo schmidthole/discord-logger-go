@@ -22,6 +22,7 @@ func NewDiscordLogger(webhookUrl string, logErrors bool) *DiscordLogger {
 }
 
 func (d *DiscordLogger) Printf(format string, args ...interface{}) {
+	log.Printf(format, args...)
 	message := fmt.Sprintf(format, args...)
 	err := d.sendWebhookMessage(message)
 	if (err != nil) && d.logErrors {
@@ -30,6 +31,7 @@ func (d *DiscordLogger) Printf(format string, args ...interface{}) {
 }
 
 func (d *DiscordLogger) Errorf(format string, args ...interface{}) {
+	log.Printf(format, args...)
 	message := fmt.Sprintf(format, args...)
 	err := d.sendWebhookMessage("**Error:** " + message)
 	if (err != nil) && d.logErrors {
